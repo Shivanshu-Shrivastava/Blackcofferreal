@@ -1,49 +1,58 @@
-.App {
-  text-align: center;
+.card{
+  border-radius: 12px;
+    width: 18rem;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-.inp{
-  border: 1px solid;
-    border-radius: 3px;
-    padding: 6px;
-    display: block;
-    margin: auto;
-    margin-bottom: 1rem;
-}
-.inp:focus{
-  border: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.live{
   color: white;
+  display: inline-block;
+  /* padding: 12px; */
+  background: #e1e6ff;
+  padding: 7px 20px;
+  margin: .3125rem 1px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.428571;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+}
+.imgtext{
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin-top: -3px;
+  border-radius: 3px;
+  color: wheat;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+  background: linear-gradient(
+60deg
+,#0f0e4e,#403f8e);
+}
+.hoversc{
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.hoversc:hover{
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  transform: scale(1.1);
 }
 
-.App-link {
-  color: #61dafb;
+/* .transition-all{
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.transition-all:hover{
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+} */

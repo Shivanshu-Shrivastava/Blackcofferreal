@@ -3,7 +3,9 @@ let usermodel = require('./../models/user.model.js')
 
 router.route('/').get((req,res)=>{
     usermodel.find()
-    .then(data => res.json(data))
+    .then(data => {res.json(data)
+    console.log('data',data)
+    })
     .catch(e => res.status(401).json('Error  ',e))
 })
 

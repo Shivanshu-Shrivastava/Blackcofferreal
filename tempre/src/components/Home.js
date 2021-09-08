@@ -1,89 +1,52 @@
-import React from 'react'
-import p1 from './p1.jfif'
-import p2 from './p2.jfif'
-import p3 from './p3.jfif'
-import ins from './ins.png'
-import lin from './lin.png'
-function Home() {
-    return (
-        <div className='container'>
-            <header>
-                <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-dark bgf">
-                    <a className="navbar-brand text-light" onclick="pop()" href="index.html">NewSite</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul className="navbar-nav">
-                            <li className="nav-item active">
-                                <a className="nav-link text-light" onclick="pop()" href="index.html">Home <span className="sr-only">(current)</span></a>
-                            </li>
+  
+import React, { useState, useEffect } from 'react';
+import Posts from './Posts';
+import Pagination from './Pagination';
+import axios from 'axios';
+import Navbar from './Navbar'
+import './../css/Home.css'
 
+const Home = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(15);
 
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get('https://blackcofffer.herokuapp.com/user');
+      setPosts(res.data);
+      console.log(res.data)
+      setLoading(false);
+    };
 
+    fetchPosts();
+  }, []);
 
-            <section className="m-4 my-5">
-                <div className="bg-light">
-                    <h4 className="display-4 text-center fotn">CONTENTS</h4>
-                    <hr className="w-50 mx-auto bg-dark" />
-                </div>
-                <div className="row mx-auto">
-                    <div className="cardimg col">
-                        <div className="card" style={{width:18+'rem'}}>
-                            <img className="card-img-top" src={p1} alt="Card image cap" />
-                            <div className="card-body">
-                                <p className="card-text">Hello Everyone, I am Shivanshu currently pursuing B.TECH.</p>
-                                <a href="https://www.linkedin.com/in/shivanshu-shrivastava-b1a0091b7/" className="link" target="_blank">My linkedIN Profile</a>
-                            </div>
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-                        </div>
-                    </div>
-                    <div className="cardimg col">
-                        <div className="card" style={{width:18+'rem'}}>
-                            <img className="card-img-top" src={p2} alt="Card image cap" />
-                            <div className="card-body">
-                                <p className="card-text">Hello Everyone, I am Shivanshu currently pursuing B.TECH.</p>
-                                <a href="https://www.linkedin.com/in/shivanshu-shrivastava-b1a0091b7/" className="link" target="_blank">My linkedIN Profile</a>
-                            </div>
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
-                        </div>
-                    </div>
-                    <div className="cardimg col">
-                        <div className="card" style={{width:18+'rem'}}>
-                            <img className="card-img-top" src={p3} alt="Card image cap" />
-                            <div className="card-body">
-                                <p className="card-text">Hello Everyone, I am Shivanshu currently pursuing B.TECH.</p>
-                                <a href="https://www.linkedin.com/in/shivanshu-shrivastava-b1a0091b7/" className="link" target="_blank">My linkedIN Profile</a>
-                            </div>
+  return (
+      <>
+      <Navbar />
+    <div className='container mt-5'>
+      <h1 className='text-center bold mb-3'>BlackCoffer Data</h1>
+      <Posts posts={currentPosts} loading={loading} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
+    </div>
+    </>
+  );
+};
 
-                        </div>
-                    </div>
-                </div>
+export default Home;
 
-            </section>
-            <div className="bg-light">
-                <h4 className="display-4 text-center fotn"><span className="ani">
-                    FOLLOW ME </span></h4>
-                <hr className="w-50 mx-auto bg-dark" />
-            </div>
-
-
-            <footer className="bgf">
-                <div className="d-flex justify-content-center">
-                    
-
-                    <a href="#"  className="m-4"> <img src={ins} alt="Instagram" className="image  mx-auto" /></a>
-                    <a href="https://www.linkedin.com/in/shivanshu-shrivastava-b1a0091b7/" className="m-4" target="_blank"> <img src={lin} alt="Instagram" className="image  mx-auto" /></a>
-
-                </div>
-
-            </footer>
-        </div>
-    )
-}
-
-export default Home
